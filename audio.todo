@@ -1,3 +1,7 @@
 初始化项目，并可以播放声音:
   ✔ 1.html audio [http://www.runoob.com/html/html5-audio.html] @done (16-12-18 23:36)
   ✔ 2.在audio内src中放入有效的链接 [随便找了个：http://www.9ku.com/play/186947.htm] @done (16-12-18 23:36)
+通过js来控制audio的播放:
+  ✔ 1.熟悉audio对象 [http://www.runoob.com/jsref/dom-obj-audio.html] @done (16-12-18 23:50)
+  ✔ 2.自定义dom @done (16-12-18 23:50)
+  ✔ 3.js操作audio对象进行播放和暂停 @done (16-12-18 23:51)
