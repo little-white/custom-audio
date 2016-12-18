@@ -5,3 +5,6 @@
   ✔ 1.熟悉audio对象 [http://www.runoob.com/jsref/dom-obj-audio.html] @done (16-12-18 23:50)
   ✔ 2.自定义dom @done (16-12-18 23:50)
   ✔ 3.js操作audio对象进行播放和暂停 @done (16-12-18 23:51)
+代码优化:
+  ✔ 1.自执行函数，解决命名冲突 @done (16-12-19 03:01)
+  ✔ 2.封装dom的获取，避免多次dom操作 @done (16-12-19 03:01)
