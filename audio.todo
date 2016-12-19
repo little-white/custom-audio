@@ -8,3 +8,12 @@
 代码优化:
   ✔ 1.自执行函数，解决命名冲突 @done (16-12-19 03:01)
   ✔ 2.封装dom的获取，避免多次dom操作 @done (16-12-19 03:01)
+显示歌曲列表并可以选中播放:
+  ✔ 1.拼接dom @done (16-12-19 04:37)
+  ✔ 2.通过事件委托使给动态的dom绑定事件 @done (16-12-19 04:37)
+  ✔ 通过js来创建audio的实例 @done (16-12-19 04:40)
+代码优化:
+  ✔ 1.封装dom，使用js template engine source:https://garann.github.io/template-chooser/ @done (16-12-19 18:31)
+  ✔ 2.doT.js https://github.com/olado/doT @done (16-12-19 18:31)
+  ✔ 3.使用script http://dobit.top/Detail/260.html @done (16-12-19 18:31)
+  ✔ 4.给dom对象添加addClass及removeClass方法 @done (16-12-19 18:31)

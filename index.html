@@ -9,13 +9,20 @@
 </head>
 
 <body>
-	<ul id="song-list"></ul>
+    <ul id="song-list"></ul>
     <div id="player-container">
-    	<button id="play">播放</button>
-    	<button id="pause">暂停</button>
+        <button id="play">播放</button>
+        <button id="pause">暂停</button>
     </div>
+    <script src="js/verdor/doT.min.js"></script>
     <script src="js/utility.js"></script>
+    <script id="songListTmpl" type="text/template">
+        {{ for(var prop in it) { }}
+        <li class="item" data-song-link="{{=it[prop].url}}">{{=it[prop].name}}</li>
+        {{ } }}
+    </script>
     <script src="js/song-list.js"></script>
+    <script src="js/data-render.js"></script>
     <script src="js/index.js"></script>
 </body>
 

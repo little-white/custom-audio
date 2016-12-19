@@ -7,35 +7,20 @@
     init();
 
     function init() {
-        var songLink = 'list';
         var songListDom = getElement('#song-list');
-        // get audio object
-
 
         // event handler
         getElement('#play').onclick = audioPlay;
         getElement('#pause').onclick = audioPause;
-        songListDom.innerHTML = generateSongListDom(songList);
+        songListDom.innerHTML = songListItemDom;
         songListDom.addEventListener('click', songListSelect);
     }
 
-    function generateSongListDom(list) {
-        var length = list.length;
-        var dom = '<ul>';
-        for (var i = 0; i < length; i++) {
-            dom += '<li class="item" data-song-link="' + list[i].url + '">' + list[i].name + '</li>';
-        }
-        dom += '</ul>';
-
-        return dom;
-    }
-
     function songListSelect(e) {
-        if (e.target && e.target.className === 'item') {
-        	for(var i=0; i<getElements('#song-list .item').length; i++){
-    			getElements('#song-list .item')[i].className = 'item';
-        	}
-            e.target.className += ' active';
+        if (e.target && e.target.className.indexOf('item') !== -1) {
+            getElements('#song-list .item').removeClass('active');
+            addClass(e.target, 'active');
+            
             obj.audio.load();
             obj.audio = new Audio(e.target.getAttribute('data-song-link'));
         }
