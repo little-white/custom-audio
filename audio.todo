@@ -17,3 +17,5 @@
   ✔ 2.doT.js https://github.com/olado/doT @done (16-12-19 18:31)
   ✔ 3.使用script http://dobit.top/Detail/260.html @done (16-12-19 18:31)
   ✔ 4.给dom对象添加addClass及removeClass方法 @done (16-12-19 18:31)
+代码优化:
+  ☐ 将new好的audio对象缓存起来

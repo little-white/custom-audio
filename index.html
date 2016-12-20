@@ -18,7 +18,7 @@
     <script src="js/utility.js"></script>
     <script id="songListTmpl" type="text/template">
         {{ for(var prop in it) { }}
-        <li class="item" data-song-link="{{=it[prop].url}}">{{=it[prop].name}}</li>
+        <li class="item {{=it[prop].active}}" data-song-link="{{=it[prop].url}}">{{=it[prop].name}}</li>
         {{ } }}
     </script>
     <script src="js/song-list.js"></script>
