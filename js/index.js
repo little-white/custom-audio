@@ -15,6 +15,7 @@
         getElement('#play').onclick = audioPlay;
         getElement('#pause').onclick = audioPause;
         getElement('#volume').oninput = audioVolume;
+        getElement('#process').oninput = audioProcess;
         songListDom.innerHTML = songListItemDom;
         songListDom.addEventListener('click', songListSelect);
     }
@@ -27,8 +28,10 @@
 
             obj.audio.load();
             for (var i = 0, len = itemsDom.length; i < len; i++) {
-                if (itemsDom[i] === e.target && typeof songCacheService.audioArr[i] !== 'object') {
-                    songCacheService.audioArr[i] = new Audio(e.target.getAttribute('data-song-link'));
+                if (itemsDom[i] === e.target) {
+                    if (typeof songCacheService.audioArr[i] !== 'object') {
+                        songCacheService.audioArr[i] = new Audio(e.target.getAttribute('data-song-link'));
+                    }
                     obj.audio = songCacheService.audioArr[i];
                 }
                 getElement('#song-lrc').innerText = '';
@@ -61,6 +64,7 @@
     }
 
     function audioPlay() {
+        obj.audio.volume = getElement('#volume').value / 100;
         if (isAudioPaused(obj.audio)) {
             var itemsDom = getElements('#song-list .item');
             for (var i = 0, len = itemsDom.length; i < len; i++) {
@@ -71,10 +75,27 @@
 
             obj.audio.play();
         }
+        showTotalTime(obj.audio.duration);
+        showCurrentTime(0);
+        setInterval(function() {
+            showCurrentTime(obj.audio.currentTime);
+        }, 1000);
+    }
+
+    function showTotalTime(seconds) {
+        getElement('#total-time').innerText = formatTime(seconds);
+    }
+
+    function showCurrentTime(seconds) {
+        getElement('#current-time').innerText = formatTime(seconds);
     }
 
     function audioVolume(e) {
         obj.audio.volume = getElement('#volume').value / 100;
+    }
+
+    function audioProcess(e) {
+        obj.audio.currentTime = getElement('#process').value * obj.audio.duration / 100;
     }
 
     function isAudioPaused(audioObj) {

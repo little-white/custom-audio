@@ -15,10 +15,13 @@
         <button id="pause">暂停</button>
         <input id="volume" type="range" min="0" max="100" value="50" />
         <input id="process" type="range" min="0" max="100" value="0" />
+        <span id="current-time"></span>/
+        <span id="total-time"></span>
     </div>
     <div id="song-lrc"></div>
     <script src="js/verdor/doT.min.js"></script>
     <script src="js/utility.js"></script>
+    <script src="js/common.js"></script>
     <script id="songListTmpl" type="text/template">
         {{ for(var prop in it) { }}
         <li class="item {{=it[prop].active}}" data-song-link="{{=it[prop].url}}" data-song-lrc="{{=it[prop].lrcLink}}">{{=it[prop].name}}</li>
