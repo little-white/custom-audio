@@ -3,7 +3,9 @@
     var obj = {
         audio: new Audio(songList[0].url)
     }
-    var objArr = [obj.audio];
+
+    songCacheService.audioArr = [obj.audio];
+    // songCacheService.lrcArr = [obj.audio];
 
     init();
 
@@ -15,7 +17,6 @@
         getElement('#pause').onclick = audioPause;
         songListDom.innerHTML = songListItemDom;
         songListDom.addEventListener('click', songListSelect);
-        getLrc(songList[0].lrcLink);
     }
 
     function songListSelect(e) {
@@ -26,26 +27,29 @@
 
             obj.audio.load();
             for (var i = 0, len = itemsDom.length; i < len; i++) {
-                if (itemsDom[i] == e.target) {
-                    if (typeof objArr[i] !== 'object') {
-                        objArr[i] = new Audio(e.target.getAttribute('data-song-link'));
-                        obj.audio = objArr[i];
-                    }
+                if (itemsDom[i] === e.target && typeof songCacheService.audioArr[i] !== 'object') {
+                    songCacheService.audioArr[i] = new Audio(e.target.getAttribute('data-song-link'));
+                    obj.audio = songCacheService.audioArr[i];
                 }
+                getElement('#song-lrc').innerText = '';
             }
-            getLrc(e.target.getAttribute('data-song-lrc'));
 
         }
     }
 
-    function getLrc(songLink){
-        songService.getLrc(songLink, success, error);
+    function getLrc(songLink, index) {
+        if (typeof songCacheService.lrcArr[index] !== 'string') {
+            songService.getLrc(songLink, success, error);
+        } else {
+            getElement('#song-lrc').innerText = songCacheService.lrcArr[index].replace(/\[.+?\]/g, '');
+        }
 
-        function success(result){
+        function success(result) {
+            songCacheService.lrcArr[index] = result;
             getElement('#song-lrc').innerText = result.replace(/\[.+?\]/g, '');
         }
 
-        function error(){
+        function error() {
 
         }
     }
@@ -58,6 +62,13 @@
 
     function audioPlay() {
         if (isAudioPaused(obj.audio)) {
+            var itemsDom = getElements('#song-list .item');
+            for (var i = 0, len = itemsDom.length; i < len; i++) {
+                if (getElement('.active') === itemsDom[i]) {
+                    getLrc(getElement('.active').getAttribute('data-song-lrc'), i);
+                }
+            }
+
             obj.audio.play();
         }
     }
