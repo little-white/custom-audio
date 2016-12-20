@@ -3,6 +3,12 @@ function getElement(selector) {
     selector.addClass = function(className) {
         selector.className += ' ' + className;
     }
+    selector.hasClass = function(className) {
+        return selector.className.indexOf(className) !== -1;
+    }
+    selector.removeClass = function(className) {
+        selector.className = selector.className.replace(className, '');
+    }
     return selector;
 }
 
@@ -26,5 +32,12 @@ function getElements(selector) {
             selectors[i].className = classNames.replace(className, '');
         }
     }
+
+    selectors.forEach(function(elem){
+        var currentElem = elem;
+        elem.addClass = function(className){
+            currentElem.className += ' ' + className;
+        }
+    })
     return selectors;
 }

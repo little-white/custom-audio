@@ -16,8 +16,12 @@
         getElement('#pause').onclick = audioPause;
         getElement('#volume').oninput = audioVolume;
         getElement('#progress').oninput = audioProgress;
+        getElement('.control').onclick = audioControl;
         songListDom.innerHTML = renderView.getSongListDom(songList);
         songListDom.addEventListener('click', songListSelect);
+        getLrc(getElement('.active').getAttribute('data-song-lrc'), 0);
+        showCurrentTime(0);
+        showTotalTime(0);
     }
 
     function songListSelect(e) {
@@ -69,19 +73,39 @@
         obj.audio.volume = getElement('#volume').value / 100;
         if (isAudioPaused(obj.audio)) {
             var itemsDom = getElements('#song-list .item');
-            for (var i = 0, len = itemsDom.length; i < len; i++) {
-                if (getElement('.active') === itemsDom[i]) {
-                    getLrc(getElement('.active').getAttribute('data-song-lrc'), i);
-                }
-            }
+            // for (var i = 0, len = itemsDom.length; i < len; i++) {
+            //     if (getElement('.active') === itemsDom[i]) {
+            //         getLrc(getElement('.active').getAttribute('data-song-lrc'), i);
+            //     }
+            // }
 
             obj.audio.play();
         }
         showTotalTime(obj.audio.duration);
-        showCurrentTime(0);
         setInterval(function() {
             showCurrentTime(obj.audio.currentTime);
         }, 1000);
+        var step = -42;
+        setInterval(function() {
+
+            for (var i = 0; i < getElements('#song-lrc li').length; i++) {
+                if (getElements('#song-lrc li')[i].getAttribute('data-song-lrc-time') === formatExactTime(obj.audio.currentTime)) {
+                    getElements('#song-lrc li').removeClass('active');
+                    getElements('#song-lrc li')[i].addClass('active');
+                    smooth_scroll_to(getElement('.song-lrc-container'), step, 200);
+                    console.log(step);
+                    // transitionScrollTo({
+                    //     element: getElement('.song-lrc-container'),
+                    //     x:0,
+                    //     y:step
+
+                    // })
+                    // getElement('.song-lrc-container').scrollTop = step;
+                    step += 42;
+                }
+            }
+            getElement('.current-bar').style.width = obj.audio.currentTime * 100 / obj.audio.duration + '%';
+        }, 1);
     }
 
     function showTotalTime(seconds) {
@@ -102,5 +126,13 @@
 
     function isAudioPaused(audioObj) {
         return audioObj.paused;
+    }
+
+    function audioControl() {
+        if (getElement('.control').hasClass('listening')) {
+            getElement('.control').removeClass('listening');
+        } else {
+            getElement('.control').addClass('listening');
+        }
     }
 })();

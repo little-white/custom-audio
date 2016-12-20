@@ -3,22 +3,47 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
     <title>Document</title>
     <link rel="stylesheet" href="css/init.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
-    <ul id="song-list"></ul>
-    <div id="player-container">
-        <button id="play">播放</button>
-        <button id="pause">暂停</button>
+    <div class="bg"></div>
+    <div class="bg-cover"></div>
+    <header>
+        <div class="avator">
+            <img src="img/bg-cover.jpg" alt="">
+        </div>
+        <div class="song-info">
+            <div class="song-name">简单爱</div>
+            <div class="singer">周杰伦</div>
+        </div>
+        <div class="control">
+            <div id="play"></div>
+            <div id="pause"></div>
+        </div>
+    </header>
+    <ul id="song-list" style="display: none;"></ul>
+    <div id="player-container" style="display: none">
         <input id="volume" type="range" min="0" max="100" value="50" />
-        <input id="progress" type="range" min="0" max="100" value="0" />
-        <span id="current-time"></span>/
-        <span id="total-time"></span>
+        <input id="progress" type="range" min="0" max="100" value="0" /> /
+        
     </div>
-    <ul id="song-lrc"></ul>
+    <div class="song-lrc-container">
+        <ul id="song-lrc"></ul>
+    </div>
+    <footer>
+        <div class="song-status">
+            <span id="current-time"></span>
+            <div class="progress-bar">
+                <div class="current-bar"></div>
+            </div>
+            <span id="total-time"></span>
+        </div>
+        <div class="btn-download">免费下载这首歌</div>
+    </footer>
     <script src="js/verdor/doT.min.js"></script>
     <script src="js/utility.js"></script>
     <script src="js/common.js"></script>
@@ -28,9 +53,9 @@
         {{ } }}
     </script>
     <script id="lrcListTmpl" type="text/template">
-        {{ for(var prop in it) { }}
+        {{ for(var prop in it) { }} {{? it[prop].name }}
         <li data-song-lrc-time="{{=it[prop].time}}">{{=it[prop].name}}</li>
-        {{ } }}
+        {{?}} {{ } }}
     </script>
     <script src="js/song-list.js"></script>
     <script src="js/song-service.js"></script>
