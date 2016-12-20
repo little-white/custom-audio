@@ -15,8 +15,8 @@
         getElement('#play').onclick = audioPlay;
         getElement('#pause').onclick = audioPause;
         getElement('#volume').oninput = audioVolume;
-        getElement('#process').oninput = audioProcess;
-        songListDom.innerHTML = songListItemDom;
+        getElement('#progress').oninput = audioProgress;
+        songListDom.innerHTML = renderView.getSongListDom(songList);
         songListDom.addEventListener('click', songListSelect);
     }
 
@@ -48,8 +48,10 @@
         }
 
         function success(result) {
+            // console.log(result.split(/\n/));
             songCacheService.lrcArr[index] = result;
-            getElement('#song-lrc').innerText = result.replace(/\[.+?\]/g, '');
+            // console.log(renderView.getLrcListDom(result.split(/\n/)));
+            getElement('#song-lrc').innerHTML = renderView.getLrcListDom(result.split(/\n/));
         }
 
         function error() {
@@ -94,8 +96,8 @@
         obj.audio.volume = getElement('#volume').value / 100;
     }
 
-    function audioProcess(e) {
-        obj.audio.currentTime = getElement('#process').value * obj.audio.duration / 100;
+    function audioProgress(e) {
+        obj.audio.currentTime = getElement('#progress').value * obj.audio.duration / 100;
     }
 
     function isAudioPaused(audioObj) {
