@@ -1,20 +1,20 @@
 (function() {
-    var init = init;
     var obj = {
         audio: new Audio(songList[0].url)
     }
-
-    songCacheService.audioArr = [obj.audio];
-    // songCacheService.lrcArr = [obj.audio];
+    var init = init;
 
     init();
 
     function init() {
+
+        songCacheService.audioArr = [obj.audio];
         var songListDom = getElement('#song-list');
 
         // event handler
         getElement('#play').onclick = audioPlay;
         getElement('#pause').onclick = audioPause;
+        getElement('#volume').oninput = audioVolume;
         songListDom.innerHTML = songListItemDom;
         songListDom.addEventListener('click', songListSelect);
     }
@@ -71,6 +71,10 @@
 
             obj.audio.play();
         }
+    }
+
+    function audioVolume(e) {
+        obj.audio.volume = getElement('#volume').value / 100;
     }
 
     function isAudioPaused(audioObj) {
