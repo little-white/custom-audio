@@ -14,14 +14,16 @@
         <button id="play">播放</button>
         <button id="pause">暂停</button>
     </div>
+    <div id="song-lrc"></div>
     <script src="js/verdor/doT.min.js"></script>
     <script src="js/utility.js"></script>
     <script id="songListTmpl" type="text/template">
         {{ for(var prop in it) { }}
-        <li class="item {{=it[prop].active}}" data-song-link="{{=it[prop].url}}">{{=it[prop].name}}</li>
+        <li class="item {{=it[prop].active}}" data-song-link="{{=it[prop].url}}" data-song-lrc="{{=it[prop].lrcLink}}">{{=it[prop].name}}</li>
         {{ } }}
     </script>
     <script src="js/song-list.js"></script>
+    <script src="js/song-service.js"></script>
     <script src="js/data-render.js"></script>
     <script src="js/index.js"></script>
 </body>

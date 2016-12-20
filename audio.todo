@@ -18,4 +18,6 @@
   ✔ 3.使用script http://dobit.top/Detail/260.html @done (16-12-19 18:31)
   ✔ 4.给dom对象添加addClass及removeClass方法 @done (16-12-19 18:31)
 代码优化:
-  ☐ 将new好的audio对象缓存起来
+  ✔ 将new好的audio对象缓存起来 @done (16-12-20 11:47)
+点击歌曲列表显示对应的歌词:
+  ✔ 使用fetch @done (16-12-20 12:13)

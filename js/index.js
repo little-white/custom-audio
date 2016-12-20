@@ -15,6 +15,7 @@
         getElement('#pause').onclick = audioPause;
         songListDom.innerHTML = songListItemDom;
         songListDom.addEventListener('click', songListSelect);
+        getLrc(songList[0].lrcLink);
     }
 
     function songListSelect(e) {
@@ -32,6 +33,19 @@
                     }
                 }
             }
+            getLrc(e.target.getAttribute('data-song-lrc'));
+
+        }
+    }
+
+    function getLrc(songLink){
+        songService.getLrc(songLink, success, error);
+
+        function success(result){
+            getElement('#song-lrc').innerText = result.replace(/\[.+?\]/g, '');
+        }
+
+        function error(){
 
         }
     }
