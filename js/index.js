@@ -48,12 +48,13 @@
         if (typeof songCacheService.lrcArr[index] !== 'string') {
             songService.getLrc(songLink, success, error);
         } else {
-            getElement('#song-lrc').innerText = songCacheService.lrcArr[index].replace(/\[.+?\]/g, '');
+            getElement('#song-lrc').innerHTML = renderView.getLrcListDom(getElement('#song-lrc').innerText = songCacheService.lrcArr[index].split(/\n/));
         }
 
         function success(result) {
             // console.log(result.split(/\n/));
             songCacheService.lrcArr[index] = result;
+            console.log(result);
             // console.log(renderView.getLrcListDom(result.split(/\n/)));
             getElement('#song-lrc').innerHTML = renderView.getLrcListDom(result.split(/\n/));
         }
@@ -94,13 +95,6 @@
                     getElements('#song-lrc li')[i].addClass('active');
                     smooth_scroll_to(getElement('.song-lrc-container'), step, 200);
                     console.log(step);
-                    // transitionScrollTo({
-                    //     element: getElement('.song-lrc-container'),
-                    //     x:0,
-                    //     y:step
-
-                    // })
-                    // getElement('.song-lrc-container').scrollTop = step;
                     step += 42;
                 }
             }
