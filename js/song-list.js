@@ -1,6 +1,6 @@
 var songList = [{
 	name: '简单爱',
-	url: 'comtom-audio/audio/jiandanai.mp3',
+	url: 'https://little-white.github.io/custom-audio/audio/jiandanai.mp3',
 	lrcLink: 'http://musicdata.baidu.com/data2/lrc/13822026/13822026.lrc?_=1482151911775'
 
 },{
